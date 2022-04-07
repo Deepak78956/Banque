@@ -72,7 +72,6 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
 
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -90,3 +89,52 @@ const calcDisplayBalance = function (movements) {
   labelBalance.textContent = balance + '₹';
 };
 calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  const deposits = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = deposits + '₹';
+
+  const withdrawls = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = withdrawls * -1 + '₹';
+
+  const interest = movements
+    .filter(deposit => deposit > 0)
+    .map(deposit => deposit * 0.012)
+    .filter(deposit => deposit >= 1)
+    .reduce((acc, deposit) => acc + deposit);
+  labelSumInterest.textContent = interest.toFixed(3) + '₹';
+};
+calcDisplaySummary(account1.movements);
+
+// Event Listeners
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+  const userNameInput = inputLoginUsername.value;
+  let flag = 0;
+  let acc;
+  for (acc of accounts) {
+    if (acc.userName === userNameInput) {
+      flag = 1;
+      break;
+    }
+  }
+  if (flag === 0) {
+    alert('username not found');
+  } else {
+    if (Number(inputLoginPin.value) === acc.pin) {
+      document.querySelector('main').style.opacity = 100;
+      document.querySelector(
+        '.welcome'
+      ).textContent = `Welcome Mr. ${acc.owner}`;
+      displayMovements(acc.movements);
+      calcDisplayBalance(acc.movements);
+      calcDisplaySummary(acc.movements);
+    } else {
+      alert('Wrong password');
+    }
+  }
+});
