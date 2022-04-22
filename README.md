@@ -2,21 +2,25 @@
 
 ![Screenshot 2022-04-22 113934](https://user-images.githubusercontent.com/45622968/164613994-80127e2c-311b-4081-9ff7-9c29e2d66d80.png)
 
+
 **Description:**
 
 Banque is a Fictional online banking application built by keeping minimalism and simplicity in mind, It is written in JavaScript basically JS handles the responsibility of DOM and user interaction here.
 > ⚠ Alert: The app has some browser compatibility issues as I've noticed, especially on mobile browsers and if you are not using the latest versions of the browser, the app may not work properly or not working at all.
 
+
 **Live Demo:**
 
 To see `Banque` live, click [here](https://deepak78956.github.io/Banque/)
 
-**🔑 Log in credentials**
+
+**🔑 Log in credentials:**
 
 | UserName | Password |
 | -------- | -------- |
 | `at`     | `1111`   |
 | `dk`     | `2222`   |
+
 
 **Features:**
 
@@ -28,11 +32,13 @@ To see `Banque` live, click [here](https://deepak78956.github.io/Banque/)
 - 🔥 _Sort Movements_
 - 💥 _Internationalize Date & Currency_
 
+
 **Technologies:**
 
 - HTML
 - CSS
 - JS (Main)🚀
+
 
 **😉 Code Overview using Flowchart:**
 
