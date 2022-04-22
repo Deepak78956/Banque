@@ -31,4 +31,5 @@ Bankinst is a Fictional online banking application built by keeping minimalism a
 - JS (Main)🚀
 
 **😉 Code Overview using Flowchart**
+
 ![Banque-flowchart](https://user-images.githubusercontent.com/45622968/164613285-2378e6f2-87c3-4dda-bc37-bbe8eb53dab8.png)
