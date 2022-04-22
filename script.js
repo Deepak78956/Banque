@@ -70,6 +70,23 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 //functions
+const setLogOutTimer = function () {
+  const tick = function () {
+    let minutes = String(Math.trunc(time / 60)).padStart(2, 0);
+    let seconds = String(time % 60).padStart(2, 0);
+    labelTimer.textContent = `${minutes}:${seconds}`;
+    time--;
+    if (time === -1) {
+      clearInterval(timer);
+      containerApp.style.opacity = 0;
+      labelWelcome.textContent = `Log in to get started`;
+    }
+  };
+  let time = 300;
+  tick();
+  timer = setInterval(tick, 1000);
+};
+
 const formatDates = function (dateObj, currAcc) {
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
@@ -154,10 +171,7 @@ const updateUI = function (currAcc) {
 };
 
 // Event Listeners
-let acc;
-acc = account1;
-updateUI(acc);
-document.querySelector('main').style.opacity = 100;
+let acc, timer;
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
@@ -174,11 +188,10 @@ btnLogin.addEventListener('click', function (e) {
     alert('username not found');
   } else {
     if (Number(inputLoginPin.value) === acc.pin) {
-      document.querySelector('main').style.opacity = 100;
-      document.querySelector('.welcome').textContent = `Welcome, Mr. ${
-        acc.owner.split(' ')[0]
-      }`;
-      updateUI(acc);
+      containerApp.style.opacity = 100;
+      labelWelcome.textContent = `Welcome, Mr. ${acc.owner.split(' ')[0]}`;
+      if (timer) clearInterval(timer);
+      setLogOutTimer();
       inputLoginPin.value = '';
       inputLoginUsername.value = '';
       inputLoginPin.blur();
@@ -194,6 +207,7 @@ btnLogin.addEventListener('click', function (e) {
         acc.locale,
         options
       ).format(now);
+      updateUI(acc);
     } else {
       alert('Wrong password');
     }
@@ -216,6 +230,8 @@ btnTransfer.addEventListener('click', function (e) {
     inputTransferAmount.blur();
     acc.movementsDates.push(new Date().toISOString());
     receiverAcc.movementsDates.push(new Date().toISOString());
+    clearInterval(timer);
+    setLogOutTimer();
     updateUI(acc);
   }
 });
@@ -243,6 +259,8 @@ btnLoan.addEventListener('click', function (e) {
     setTimeout(() => {
       acc.movements.push(loanAmt);
       acc.movementsDates.push(new Date().toISOString());
+      clearInterval(timer);
+      setLogOutTimer();
       updateUI(acc);
     }, 2500);
   }
