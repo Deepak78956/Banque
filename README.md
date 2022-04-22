@@ -7,6 +7,9 @@
 Bankinst is a Fictional online banking application built by keeping minimalism and simplicity in mind, It is written in JavaScript basically JS handles the responsibility of DOM and user interaction here.
 > ⚠ Alert: The app has some browser compatibility issues as I've noticed, especially on mobile browsers and if you are not using the latest versions of the browser, the app may not work properly or not working at all.
 
+**Live Demo**
+To see `Banque` live, click [here](https://deepak78956.github.io/Banque/)
+
 **🔑 Log in credentials**
 
 | UserName | Password |
